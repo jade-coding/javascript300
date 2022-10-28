@@ -14,8 +14,8 @@ class BarChart extends Chart{
         super(width,height)
     }
     draw(){
-        this.drawLine();
-        console.log(`draw ${this.width} X ${this.height} barChart`);
+        this.drawLine(); //draw line
+        console.log(`draw ${this.width} X ${this.height} barChart`);  //draw 100 X 100 barChart
     }
 }
 
