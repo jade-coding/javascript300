@@ -19,3 +19,7 @@ console.log(str.search(regex1)) // 13
 console.log(str.search(regex2)) // -1
 console.log(str.search(regex3)) // 15 사실 g옵션을 달아서 t를 전부 찾지만 search 특성상 첫번째 매칭된 위치만 반환해줌.
 console.log(str.search(regex4)) // 0
+
+/*
+
+*/
