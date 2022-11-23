@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom 이해하기</title>
+</head>
+<body>
+    <div id="div1">hello DOM</div>
+    <ul>
+        <li>list item1</li>
+        <li>list item2</li> 
+    </ul>
+    <script>
+        const div1El = document.getElementById('div1');
+        console.log(div1El.innerHTML); // hello DOM
+
+        console.log(div1El.nodeType); // 1
+        console.log(div1El.nodeType === Node.ELEMENT_NODE); // true
+
+        console.log(div1El.constructor) // ƒ HTMLDivElement() { [native code] }
+        console.log(div1El instanceof HTMLDivElement) //  true
+        console.log(div1El instanceof HTMLElement) // true
+        console.log(div1El instanceof Element) // true
+        console.log(div1El instanceof Node) // true
+        console.log(Element.prototype) // Element {…}after
+        console.log(div1El.tagName) // DIV
+
+        const div1El2 = document.querySelector('#div1')
+        console.log(div1El2.innerHTML) // hello DOM
+
+        const liEls = document.querySelectorAll('ul li');
+        console.log(liEls.item(0).innerHTML) // list item1
+        console.log(liEls.item(1).textContent) // list item2
+    </script>
+</body>
+</html>
+
+<!-- 
+    실행결과
+                  hello DOM
+ex141(DOM).html:19 1
+ex141(DOM).html:20 true
+ex141(DOM).html:22 ƒ HTMLDivElement() { [native code] }
+ex141(DOM).html:23 true
+ex141(DOM).html:24 true
+ex141(DOM).html:25 true
+ex141(DOM).html:26 true
+ex141(DOM).html:27 Element {…}after: ƒ after()animate: ƒ animate()append: ƒ append()ariaAtomic: (...)ariaAutoComplete: (...)ariaBrailleLabel: (...)ariaBrailleRoleDescription: (...)ariaBusy: (...)ariaChecked: (...)ariaColCount: (...)ariaColIndex: (...)ariaColSpan: (...)ariaCurrent: (...)ariaDescription: (...)ariaDisabled: (...)ariaExpanded: (...)ariaHasPopup: (...)ariaHidden: (...)ariaInvalid: (...)ariaKeyShortcuts: (...)ariaLabel: (...)ariaLevel: (...)ariaLive: (...)ariaModal: (...)ariaMultiLine: (...)ariaMultiSelectable: (...)ariaOrientation: (...)ariaPlaceholder: (...)ariaPosInSet: (...)ariaPressed: (...)ariaReadOnly: (...)ariaRelevant: (...)ariaRequired: (...)ariaRoleDescription: (...)ariaRowCount: (...)ariaRowIndex: (...)ariaRowSpan: (...)ariaSelected: (...)ariaSetSize: (...)ariaSort: (...)ariaValueMax: (...)ariaValueMin: (...)ariaValueNow: (...)ariaValueText: (...)assignedSlot: (...)attachShadow: ƒ attachShadow()attributes: (...)before: ƒ before()checkVisibility: ƒ checkVisibility()childElementCount: (...)children: (...)classList: (...)className: (...)clientHeight: (...)clientLeft: (...)clientTop: (...)clientWidth: (...)closest: ƒ closest()computedStyleMap: ƒ computedStyleMap()elementTiming: (...)firstElementChild: (...)getAnimations: ƒ getAnimations()getAttribute: ƒ getAttribute()getAttributeNS: ƒ getAttributeNS()getAttributeNames: ƒ getAttributeNames()getAttributeNode: ƒ getAttributeNode()getAttributeNodeNS: ƒ getAttributeNodeNS()getBoundingClientRect: ƒ getBoundingClientRect()getClientRects: ƒ getClientRects()getElementsByClassName: ƒ getElementsByClassName()getElementsByTagName: ƒ getElementsByTagName()getElementsByTagNameNS: ƒ getElementsByTagNameNS()getInnerHTML: ƒ getInnerHTML()hasAttribute: ƒ hasAttribute()hasAttributeNS: ƒ hasAttributeNS()hasAttributes: ƒ hasAttributes()hasPointerCapture: ƒ hasPointerCapture()id: (...)innerHTML: (...)insertAdjacentElement: ƒ insertAdjacentElement()insertAdjacentHTML: ƒ insertAdjacentHTML()insertAdjacentText: ƒ insertAdjacentText()lastElementChild: (...)localName: (...)matches: ƒ matches()namespaceURI: (...)nextElementSibling: (...)onbeforecopy: (...)onbeforecut: (...)onbeforepaste: (...)onfullscreenchange: (...)onfullscreenerror: (...)onsearch: (...)onwebkitfullscreenchange: (...)onwebkitfullscreenerror: (...)outerHTML: (...)part: (...)prefix: (...)prepend: ƒ prepend()previousElementSibling: (...)querySelector: ƒ querySelector()querySelectorAll: ƒ querySelectorAll()releasePointerCapture: ƒ releasePointerCapture()remove: ƒ remove()removeAttribute: ƒ removeAttribute()removeAttributeNS: ƒ removeAttributeNS()removeAttributeNode: ƒ removeAttributeNode()replaceChildren: ƒ replaceChildren()replaceWith: ƒ replaceWith()requestFullscreen: ƒ requestFullscreen()requestPointerLock: ƒ requestPointerLock()role: (...)scroll: ƒ scroll()scrollBy: ƒ scrollBy()scrollHeight: (...)scrollIntoView: ƒ scrollIntoView()scrollIntoViewIfNeeded: ƒ scrollIntoViewIfNeeded()scrollLeft: (...)scrollTo: ƒ scrollTo()scrollTop: (...)scrollWidth: (...)setAttribute: ƒ setAttribute()setAttributeNS: ƒ setAttributeNS()setAttributeNode: ƒ setAttributeNode()setAttributeNodeNS: ƒ setAttributeNodeNS()setHTML: ƒ setHTML()setPointerCapture: ƒ setPointerCapture()shadowRoot: (...)slot: (...)tagName: (...)toggleAttribute: ƒ toggleAttribute()webkitMatchesSelector: ƒ webkitMatchesSelector()webkitRequestFullScreen: ƒ webkitRequestFullScreen()webkitRequestFullscreen: ƒ webkitRequestFullscreen()constructor: ƒ Element()Symbol(Symbol.toStringTag): "Element"Symbol(Symbol.unscopables): {slot: true, popUp: true, prepend: true, append: true, replaceChildren: true, …}baseURI: (...)childNodes: (...)firstChild: (...)isConnected: (...)lastChild: (...)nextSibling: (...)nodeName: (...)nodeType: (...)nodeValue: (...)ownerDocument: (...)parentElement: (...)parentNode: (...)previousSibling: (...)textContent: (...)get ariaAtomic: ƒ ariaAtomic()set ariaAtomic: ƒ ariaAtomic()get ariaAutoComplete: ƒ ariaAutoComplete()set ariaAutoComplete: ƒ ariaAutoComplete()get ariaBrailleLabel: ƒ ariaBrailleLabel()set ariaBrailleLabel: ƒ ariaBrailleLabel()get ariaBrailleRoleDescription: ƒ ariaBrailleRoleDescription()set ariaBrailleRoleDescription: ƒ ariaBrailleRoleDescription()get ariaBusy: ƒ ariaBusy()set ariaBusy: ƒ ariaBusy()get ariaChecked: ƒ ariaChecked()set ariaChecked: ƒ ariaChecked()get ariaColCount: ƒ ariaColCount()set ariaColCount: ƒ ariaColCount()get ariaColIndex: ƒ ariaColIndex()set ariaColIndex: ƒ ariaColIndex()get ariaColSpan: ƒ ariaColSpan()set ariaColSpan: ƒ ariaColSpan()get ariaCurrent: ƒ ariaCurrent()set ariaCurrent: ƒ ariaCurrent()get ariaDescription: ƒ ariaDescription()set ariaDescription: ƒ ariaDescription()get ariaDisabled: ƒ ariaDisabled()set ariaDisabled: ƒ ariaDisabled()get ariaExpanded: ƒ ariaExpanded()set ariaExpanded: ƒ ariaExpanded()get ariaHasPopup: ƒ ariaHasPopup()set ariaHasPopup: ƒ ariaHasPopup()get ariaHidden: ƒ ariaHidden()set ariaHidden: ƒ ariaHidden()get ariaInvalid: ƒ ariaInvalid()set ariaInvalid: ƒ ariaInvalid()get ariaKeyShortcuts: ƒ ariaKeyShortcuts()set ariaKeyShortcuts: ƒ ariaKeyShortcuts()get ariaLabel: ƒ ariaLabel()set ariaLabel: ƒ ariaLabel()get ariaLevel: ƒ ariaLevel()set ariaLevel: ƒ ariaLevel()get ariaLive: ƒ ariaLive()set ariaLive: ƒ ariaLive()get ariaModal: ƒ ariaModal()set ariaModal: ƒ ariaModal()get ariaMultiLine: ƒ ariaMultiLine()set ariaMultiLine: ƒ ariaMultiLine()get ariaMultiSelectable: ƒ ariaMultiSelectable()set ariaMultiSelectable: ƒ ariaMultiSelectable()get ariaOrientation: ƒ ariaOrientation()set ariaOrientation: ƒ ariaOrientation()get ariaPlaceholder: ƒ ariaPlaceholder()set ariaPlaceholder: ƒ ariaPlaceholder()get ariaPosInSet: ƒ ariaPosInSet()set ariaPosInSet: ƒ ariaPosInSet()get ariaPressed: ƒ ariaPressed()set ariaPressed: ƒ ariaPressed()get ariaReadOnly: ƒ ariaReadOnly()set ariaReadOnly: ƒ ariaReadOnly()get ariaRelevant: ƒ ariaRelevant()set ariaRelevant: ƒ ariaRelevant()get ariaRequired: ƒ ariaRequired()set ariaRequired: ƒ ariaRequired()get ariaRoleDescription: ƒ ariaRoleDescription()set ariaRoleDescription: ƒ ariaRoleDescription()get ariaRowCount: ƒ ariaRowCount()set ariaRowCount: ƒ ariaRowCount()get ariaRowIndex: ƒ ariaRowIndex()set ariaRowIndex: ƒ ariaRowIndex()get ariaRowSpan: ƒ ariaRowSpan()set ariaRowSpan: ƒ ariaRowSpan()get ariaSelected: ƒ ariaSelected()set ariaSelected: ƒ ariaSelected()get ariaSetSize: ƒ ariaSetSize()set ariaSetSize: ƒ ariaSetSize()get ariaSort: ƒ ariaSort()set ariaSort: ƒ ariaSort()get ariaValueMax: ƒ ariaValueMax()set ariaValueMax: ƒ ariaValueMax()get ariaValueMin: ƒ ariaValueMin()set ariaValueMin: ƒ ariaValueMin()get ariaValueNow: ƒ ariaValueNow()set ariaValueNow: ƒ ariaValueNow()get ariaValueText: ƒ ariaValueText()set ariaValueText: ƒ ariaValueText()get assignedSlot: ƒ assignedSlot()get attributes: ƒ attributes()get childElementCount: ƒ childElementCount()get children: ƒ children()get classList: ƒ classList()set classList: ƒ classList()get className: ƒ className()set className: ƒ className()get clientHeight: ƒ clientHeight()get clientLeft: ƒ clientLeft()get clientTop: ƒ clientTop()get clientWidth: ƒ clientWidth()get elementTiming: ƒ elementTiming()set elementTiming: ƒ elementTiming()get firstElementChild: ƒ firstElementChild()get id: ƒ id()set id: ƒ id()get innerHTML: ƒ innerHTML()set innerHTML: ƒ innerHTML()get lastElementChild: ƒ lastElementChild()get localName: ƒ localName()get namespaceURI: ƒ namespaceURI()get nextElementSibling: ƒ nextElementSibling()get onbeforecopy: ƒ onbeforecopy()set onbeforecopy: ƒ onbeforecopy()get onbeforecut: ƒ onbeforecut()set onbeforecut: ƒ onbeforecut()get onbeforepaste: ƒ onbeforepaste()set onbeforepaste: ƒ onbeforepaste()get onfullscreenchange: ƒ onfullscreenchange()set onfullscreenchange: ƒ onfullscreenchange()get onfullscreenerror: ƒ onfullscreenerror()set onfullscreenerror: ƒ onfullscreenerror()get onsearch: ƒ onsearch()set onsearch: ƒ onsearch()get onwebkitfullscreenchange: ƒ onwebkitfullscreenchange()set onwebkitfullscreenchange: ƒ onwebkitfullscreenchange()get onwebkitfullscreenerror: ƒ onwebkitfullscreenerror()set onwebkitfullscreenerror: ƒ onwebkitfullscreenerror()get outerHTML: ƒ outerHTML()set outerHTML: ƒ outerHTML()get part: ƒ part()set part: ƒ part()get prefix: ƒ prefix()get previousElementSibling: ƒ previousElementSibling()get role: ƒ role()set role: ƒ role()get scrollHeight: ƒ scrollHeight()get scrollLeft: ƒ scrollLeft()set scrollLeft: ƒ scrollLeft()get scrollTop: ƒ scrollTop()set scrollTop: ƒ scrollTop()get scrollWidth: ƒ scrollWidth()get shadowRoot: ƒ shadowRoot()get slot: ƒ slot()set slot: ƒ slot()get tagName: ƒ tagName()[[Prototype]]: Node
+ex141(DOM).html:28 DIV
+ex141(DOM).html:31 hello DOM
+ex141(DOM).html:34 list item1
+ex141(DOM).html:35 list item2
+
+
+ -->
