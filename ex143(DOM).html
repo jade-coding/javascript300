@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 속성과 태그 속성 이해하기 예제</title>
+</head>
+<body>
+    <div id="div1" class="div-class">DIV태그</div>
+    <input type="text" value="jay" id="input1">
+
+    <script>
+        const div1El = document.getElementById('div1')
+        const inputEl = document.getElementById('input1')
+
+        div1El.removeAttribute('id')
+        console.log(div1El.id) // 빈칸으로 출력
+        div1El.setAttribute('id','new-id') // 위 코드에서 제거했으므로 새로 생성 및 할당을 함
+        console.log(div1El.id)//new-id
+
+        div1El.id = 'new-id-2'
+        console.log(div1El.getAttribute('id')) // new-id-2
+    /*
+        id 프로퍼티 값을 변경합니다. 그러면 어트리뷰트 값도 함께 변경되는 것을 볼 수 있습니다. 즉 id는 어트리뷰트와 프로퍼티가 서로 값이 동기화되는 것을 볼 수 있습니다.
+
+    */
+
+        console.log(div1El.getAttribute('class')) // div-class
+        console.log(div1El.class) // undefined
+        console.log(div1El.className) // div-class 
+//  어트리뷰트와 프로퍼티 값이 연동되는데 class가 아니라 className을 쓰이고 있다! 
+        div1El.setAttribute('class','new-div-class')
+        console.log(div1El.className) // new-div-class
+        div1El.className = 'new-div-class2'
+        console.log(div1El.getAttribute('class')) // new-div-class2
+
+        const valueAttr = input1.getAttribute('value')
+        console.log(valueAttr) // jay
+        console.log(input1.value) // jay
+        input1.value='jay2'
+        console.log(input1.getAttribute('value')) // jay
+    /*
+     input1 요소의 value 어트리뷰트 값과 value 값이 초기엔 같지만 사용자가 값을 수정하거나 value 프로퍼티 값을 변경해도 value 어트리뷰트 값은 변경이 안 됩니다. 
+     즉, value는 프로퍼티 값과 어트리뷰트 값이 항상 같지는 않음
+    */
+    </script>
+
+</body>
+</html>
