@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>이벤트 전파 제어하기 예제</title>
+        <style>
+        #prevent {
+            border:1px solid red;
+        }</style>
+    </head>
+    <body>
+        <p>
+            일반적인 글
+            <span id="prevent">이벤트를 막는 글</span>
+            <br>
+            일반적인 글2
+        </p>
+        <script>
+            const normalPEl = document.querySelector('p')
+            const eventPreventedEl = document.querySelector('#prevent')
+            //contextmenu는 마우스 우클릭시 나오는 메뉴창을 뜻함
+            normalPEl.addEventListener("contextmenu", function(){
+                console.log("contextmenu. 호출")
+            })
+            eventPreventedEl.addEventListener('contextmenu',function(e){
+                console.log('이벤트를 막는 글 클릭')
+                event.stopPropagation() // 이벤트를 상위로 전파되지 않도록 함. 부모인 p요소에 이벤트가 호출되지 않음
+                event.preventDefault() // 브라우저에서 정의한 기본 행위, 우클릭 메뉴버튼이 안 나오도록 막음. 
+            })
+        </script>
+
+    </body>
+
+</html>
