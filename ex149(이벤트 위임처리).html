@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 위임 처리하기</title>
+</head>
+<body>
+    <h2>할 일</h2>
+    <ul id="todo-list">
+        <li>공부하기 <button class="remove-button">x</button></li>
+        <li>장보기 <button class="remove-button">x</button></li>
+        <li>숙제하기 <button class="remove-button">x</button></li>
+    </ul>
+    <script>
+        document.querySelector("ul#todo-list").addEventListener('click',function(event){
+            // x버튼이 아닌 것들은 무시하도록 함. 이렇게 위임처리는 부모에서 자식의 어떠한 요소가 대상 요소가 되는지를 확인하여 이벤트 처리를 함
+            if(event.target.className.indexOf("remove-button")<0){
+                console.log(event.target)
+                return ;
+            }
+            const li = event.target.closest("li")
+            console.log(`${li.innerText}삭제`)
+            li.remove()
+        })
+    </script>
+</body>
+</html>
