@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로컬스토리지 예제</title>
+</head>
+<body>
+    <script>
+        class Cart {
+            items =[]
+            constructor(){
+                this._key = "app-cart"
+                const itemString = localStorage.getItem(this._key)
+                if(itemString){
+                    this.items = JSON.parse(itemString)
+                }else{
+                    this.items = []
+                }
+            }
+            addItem(item){
+                // console.log(this.items)
+                this.items.push(item)
+                const itemString= JSON.stringify(this.items)
+                localStorage.setItem(this._key, itemString)
+              
+            }
+        }
+        const cart = new Cart()
+        // console.table(cart.items)
+        cart.addItem({name: 'A노트북', price:20000})
+        cart.addItem({name: 'B노트북', price:62662})
+        console.table(cart.items)
+ 
+        /*
+        로컬스토리지는 사용자의 스키마+호스트이름+포트로 관리됩니다. 127.0.0.1:8080로 호스팅 되는 페이지들은 모두 같은 로컬 스토리지객체를 가지게 됨 그래서 키를 통하여 데이터를 관리해야함
+        google.com의 로컬스토리지는 접근을 할 수 조차 없음. 호스트이름은 location.hostname으로 확인할 수 있음
+        */
+    </script>
+</body>
+</html>

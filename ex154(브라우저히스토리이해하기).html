@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>브라우저 히스토리 이해하기 예제</title>
+    <style>
+        .selected {
+            background-color: red;
+            
+        }
+    </style>
+</head>
+<body>
+    <ul class="user-list">
+        <li data-name="jay">jay</li>
+        <li data-name="bbo">bbo</li>
+        <li data-name="harin">harin</li>
+    </ul>
+    <script>
+        const userList = document.querySelector('.user-list')
+
+        userList.addEventListener('click', e => {
+            const liEl = e.target
+            if(liEl.tagName === 'LI'){
+                console.log(liEl)
+                const name = liEl.dataset.name
+                select(userList, liEl)
+                history.pushState(name, null, name)
+
+            }
+        })
+        window.addEventListener('popstate',function(e){
+            const selectedUser = document.querySelector(`.user-list[data-name="${e.state}"]`)
+            select(userList, selectedUser)
+
+        })
+        function select(ulEl, liEl){
+            Array.from(ulEl.children).forEach(v => v.classList.remove('selected'))
+
+            if(liEl) liEl.classList.add('selected')
+        }
+        /*
+        history 객체의 pushState 메소드를 이용하여 새로운 히스토리를 추가할 수 있음. 새로운 히스토리가 추가되고 전달된 인자에 의해서 URL이 변경됨. 
+        history.pushState(state객체, title 문자열, url문자열)
+        - state 객체 : JS 객체로 현재 히스토리에 해당하는 상태를 history.state로 가져올 수 있음
+        - title 문자열 : 브라우저 상단 타이틀을 변경함
+        - url 문자열 : 새로운 히스토리 URL
+
+        브라우저 상단의 뒤로가기 또는 앞으로가기를 누를 때 마다 브라우저 히스토리가 되고 popstate이벤트가 발생
+        history.back, history.go와 같은 메소드에도 이벤트는 발생하지만, history.pushState 메소드에는 popstate 이벤트가 발생하지 않음
+        
+        */
+
+    </script>
+</body>
+</html>
+
