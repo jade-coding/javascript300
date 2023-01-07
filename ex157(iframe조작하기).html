@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 일단 예제 코드의 오류가 있음 -->
+    <!-- cors 문제도 해결을 해야함. -->
+    <h1>iframe 바깥문서</h1>
+    <iframe id="iframe1" src="./ex157-1.html" frameborder="0" width="100%" height="200px"></iframe>
+    
+    <script>
+        const iframe1 = document.getElementById('iframe1')
+        iframe1.addEventListener('load', e => {
+            const iframeDocument = iframe1.contentWindow.document.body
+            // iframeDocument.style.backgroundColor = "blue"
+            console.log('여기까지 실해되나')
+
+            const newEl = document.createElement('div')
+            newEl.innerHTML = '<h1>iframe 안쪽문서</h1>'
+            newEl.style.color = 'white'
+            newEl.style.backgroundColor="red"
+            iframeDocument.appendChild(newEl)
+            setTimeout(()=>{
+                const iframeWindow = iframe1.contentWindow
+                iframeWindow.location = './ex.html'
+            },3000)
+        })
+    </script>
+</body>
+</html>

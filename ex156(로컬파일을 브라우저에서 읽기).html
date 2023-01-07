@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .dot-box {
+            margin: 10px;
+            padding: 20px;
+            border: 1px dotted black;
+            }
+    </style>
+</head>
+<body>
+    <div id="file-box" class="dot-box">
+        이미지 파일을 선택한 후 이곳에 끌어서 놓아주세요.
+    </div>
+    <output id="result"></output>
+    <script>
+        // 크롬에서 이미지 파일을 끌어 올리고 내리는 것이 안 될 수도 있음 안 된다면 구글에 검색할필요가 있음 
+        // 나는 chrome에 flag로 가서 touchUI에 대한 부분을 enabled로 변경하고서 재실행하니 작동되었다.
+        // 다른 브라우저로 정상적으로 되는게 크롬만 안 되고 있어서 찾을 수 있었음.
+        var dropZone = document.getElementById('file-box')
+        dropZone.addEventListener('dragover', e=>{
+            e.stopPropagation()
+            e.preventDefault()
+        })
+        dropZone.addEventListener('drop', e => {
+            e.stopPropagation()
+            e.preventDefault()
+            /* << e.files 안에 값 일부 >>
+            dataTransfer:DataTransfer
+            dropEffect:"none"
+            effectAllowed:"all"
+            files:FileList
+            length:0
+            [[Prototype]]:FileList
+            item:ƒ item()
+            length:1
+            name:"item"
+            arguments:(...)
+            caller:(...)
+            [[Prototype]]:ƒ ()
+            */
+            const files = e.dataTransfer.files //drop 이벤트 객체의 dataTransfer 속성을 통해 DataTransfer 타입의 객체에 접근할 수 있음
+            // 대상이 파일일 경우 files 속성을 통해서 file에 접근할 수 있음
+            console.log('drop할때임')
+            console.log(e)
+            Array.from(files) // DataTransfer 객체의 files 속성은 배열이 아니라 FileList 타입임. 그래서 배열의 프로토타입에 연결된 메소드들을 사용할 수 없기에 FileLit를 배열로 변경
+            // 배열에 속성들로 files 값들이 들어가게 됨. 배열의 길이는 0이겠지만!
+            .filter(file => file.type.match('image.*')) // image/png image/jpeg 이런식으로 나타남.
+            .forEach(file => {
+                const reader = new FileReader()
+                reader.onload = (e) => { // 콜백함수라서 비동기로 파일을 모두 읽으면 실행함.
+                    console.log('image파일인석 식별후에 foreach문 돌리면서')
+                    console.log(file) // File {name: 'image.png', lastModified: 1673000136888, lastModifiedDate: Fri Jan 06 2023 19:15:36 GMT+0900 (한국 표준시), webkitRelativePath: '', size: 44168, …}lastModified: 1673000136888lastModifiedDate: Fri Jan 06 2023 19:15:36 GMT+0900 (한국 표준시) {}name: "image.png"size: 44168type: "image/png"webkitRelativePath: ""[[Prototype]]: File
+                    const imgEl = document.createElement('img')
+                    imgEl.src = e.target.result // result : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZY"
+                    imgEl.title = file.name
+                    console.log('title은 바로 ')
+                    console.log(imgEl.title)
+                    document.getElementById('result').appendChild(imgEl) // 파일 내용을 데이터 URL로 읽게 되어 읽은 결과를 SRC에 할당하면 해당 내용으로 이미지가 그려짐
+                    // 데이터 URL은 작은 이미지 파일을 문서의 인라인으로 포함시키고자 할 때 사용됨. 데이터 URL은 data:[미디어타입][;base64여부],데이터 형태로 표현됨
+                }
+                reader.readAsDataURL(file) // 파일 내용을 읽기 위해서 파일을 인자로 전달하며 DataURL로 읽기 메소드를 호출함.
+            })
+        })
+    </script>
+</body>
+</html>
