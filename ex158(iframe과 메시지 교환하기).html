@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메시지 교환하기</title>
+</head>
+<body>
+    <div>
+        <label>결제금액 : </label> <b>20000원</b></label>
+        <br>
+        <button id="checkout-btn">카드입력</button>
+    </div>
+    <iframe id="card-payment" width="500px" height="200px"  frameborder="0"></iframe> 
+    <!-- src=""는 외부 HTML 페이지를 나중에 읽기 위해서 위에 반영하지 않았음 -->
+    <script>
+        const iWindow = document.getElementById('card-payment').contentWindow // iframe요소의 독립된 contentWindow 객체를 할당
+        document.getElementById('checkout-btn')
+        .addEventListener('click', e => {
+            iWindow.location = 'payment.html'
+        })
+
+        window.addEventListener('message', e=> { // 현재 문서의 window 객체에 message 이벤트에 대해 리스너 함수를 등록함. iframe 내의 문서에서 postMessage 메시지를 전달하면
+            // message 이벤트가 발생하여 등록된 리스너 함수가 호출됨. 전달한 메시지는 event 파라미터의 data 속성을 통해 접근이 가능함
+            console.log(e.data)
+        })
+    </script>
+</body>
+</html>

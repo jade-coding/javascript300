@@ -1,0 +1,36 @@
+<script>
+    function submitForm(){
+        const form = document.getElementById('card-form')
+        const formData = new FormData(form) //formData는 XHLHttpRequest를 통해 서버에 데이터를 전달할 때 사용할 수 있고, FormData를 폼 요소로부터 생성하면 .get메소드를 활용하여 값을 받아올 수 있음
+        const formObj = {
+            cardNumber : formData.get("cardNumber"), // get은 결국 name attribute를 탐색하여 일치하는 값을 받아옴
+            holderName : formData.get("holderName") // 
+
+        }
+        /*
+            [MDN 참고]
+            postMessage는 window 오브젝트들 사이에서 안전하게 CORS 통신을 할 수 있게 함. 
+        targetWindow.postMessage(message, targetOrigin, [transfer])
+            targetWindow : 메세지를 전달 받을 window의 참조. 
+
+        */
+        window.parent.postMessage(formObj, '*') // 부모요소에 전달할 form 데이터 , postMessage 메소드는 formData 형식 객체는 전달되지 않아서 새로 객체를 만들어서 집어넣음
+        // window의 parent 객체는 iframe 태그가 작성된 부모 window 객체를 가리킴. postMessage는 메시지를 보낼 대상 window 객체를 통해 호출해야 함. 
+        // 그래서 부모 window객체의 postMessage를 호출함. postMessage 첫번째 인자 : 전달할 메시지, 두번째 인자 : 대상 window 객체의 출처. 출처는 * or URI를 작성해야 함
+        // *는 어떠한 출처도 가리지 않고 받음을 의미. 만약 http://google.com으로 작성하면 https://google.com에서 호스팅 되는 문서의 window 객체로만 메시지를 전달할 수 있음
+    }
+</script>
+<form id="card-form" onsubmit = "submitForm()">
+    <div>
+        <label>카드번호</label>
+        <input type="text" name = "cardNumber">
+
+    </div>
+    
+    <div>
+        <label for="">이름</label>
+        <input type= "text" name = "holderName">
+    </div>
+    <button type="submit">결제하기</button> // 
+
+</form>

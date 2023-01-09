@@ -10,7 +10,7 @@
     <!-- 일단 예제 코드의 오류가 있음 -->
     <!-- cors 문제도 해결을 해야함. -->
     <h1>iframe 바깥문서</h1>
-    <iframe id="iframe1" src="./ex157-1.html" frameborder="0" width="100%" height="200px"></iframe>
+    <iframe id="iframe1" src="./ex157-1.html" frameborder="0" width="100%" height="600px"></iframe>
     
     <script>
         const iframe1 = document.getElementById('iframe1')
@@ -26,7 +26,7 @@
             iframeDocument.appendChild(newEl)
             setTimeout(()=>{
                 const iframeWindow = iframe1.contentWindow
-                iframeWindow.location = './ex.html'
+                iframeWindow.location = 'https://www.youtube.com/embed/X7nTyBHI2Pw'
             },3000)
         })
     </script>
