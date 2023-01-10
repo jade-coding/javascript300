@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 웹서버에서 실행하여야 CORS 문제가 생기지않음 -->
+<!-- 웹 워커는 브라우저 단에서 실행되는 것인데 HTTP같은 프로토콜 통신이 아닌 로컬 시스템이어서 문제가 발생 
+It is because of the security restrictions.  브라우저는 파일시스템 접근해서 빼오는 거 못하니까..
+
+https://stackoverflow.com/questions/21408510/chrome-cant-load-web-worker
+
+재밌는 QnA - 크롬브라우저로 파일시스템을 접근하려는 시도
+https://stackoverflow.com/questions/16487803/why-does-this-filesystem-api-requestquota-call-fail
+
+
+-->
+<body>
+    <div>
+        <input type="number" id="number">
+        <button id="start-btn">피보나치수열 계산시작</button>
+    </div>
+    <div id="result"></div>
+    <script >
+        const result = document.getElementById('result')
+        let isCalculation = false;
+        if(window.Worker){
+            const fibonacciWorker = new Worker('fibonacci.js')
+            document.getElementById('start-btn')
+            .addEventListener('click', e => {
+                if(isCalculation){
+                    return
+                }
+                const value = document.getElementById('number').value
+                fibonacciWorker.postMessage({num: value})
+                result.innerHTML = '계산중 ...'
+                isCalculation = true
+            })
+            fibonacciWorker.onmessage= function(e){
+                result.innerHTML = e.data
+                isCalculation = false;
+            }
+            fibonacciWorker.onerror = function(error){
+                console.error('에러 발생', error.message);
+                result.innerHTML = error.message
+                isCalculation = false
+            }
+        }
+    </script>
+</body>
+</html>
