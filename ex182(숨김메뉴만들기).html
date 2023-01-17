@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="drawer-opener">OPEN MENU</button>
+    <div class="drawer">
+        <H2>숨김 메뉴</H2>
+        <ul>
+            <li>항목 1</li>
+            <li>항목 2</li>
+        </ul>
+    </div>
+    <script>
+function Drawer(el, open = false) {
+      this.el = el;
+      this.isOpen = open;
+      Object.assign(this.el.style, {
+        display: 'block', 
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        width: '200px',
+        padding: '10px',
+        backgroundColor: 'white',
+        boxShadow: '0 0 36px 0 rgba(0,0,0,0.1)',
+        transition: 'all 0.4s ease-out' 
+      });
+      (this.isOpen) ? this.open() : this.close();
+    }
+    Drawer.prototype.open = function() {
+      this.isOpen = true;
+      this.el.style.transform = 'translate(0px)';
+    }
+    Drawer.prototype.close = function() {
+      this.isOpen = false;
+      this.el.style.transform = 'translate(220px)';
+    }
+
+    const sideMenu = new Drawer(document.querySelector('.drawer'));
+    document.getElementById('drawer-opener')
+      .addEventListener('click', e => {    
+        if (!sideMenu.isOpen) {
+          sideMenu.open();
+        } else {
+          sideMenu.close();
+        }
+      });
+
+    </script>
+    <!-- <script src="./dist/js/bundle.js"></script> -->
+    <!-- <script type="text/babel" data-type="module" src="./ex182_2.js"></script> -->
+</body>
+</html>
